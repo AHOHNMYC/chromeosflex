@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chrome OS download</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {font-family: monospace}
+        td {vertical-align: top}
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <select id="sources">
+                <option></option>
+                <option>cloudready_recovery</option>
+                <option>onhub_recovery</option>
+                <option>recovery</option>
+                <option>workspaceHardware_recovery</option>
+            </select>
+        </td>
+        <td>
+            <select id="images"></select><br>
+            <span id="imageInfo"></span>
+        </td>
+    </tr>
+</table>
+<script>
+    function loadJson() {
+        while (images.firstChild)
+            images.firstChild.remove();
+        updateImageInfo();
+        if (!sources.value)
+            return;
+
+        fetch(sources.value+'.json')
+        .then(resp => resp.json())
+        .then(json => json.forEach(image => {
+            const o = images.appendChild(document.createElement('option'));
+            Object.keys(image).forEach(key => o.dataset[key] = image[key]);
+            o.textContent = image.name;
+        }))
+        .then(updateImageInfo)
+    }
+
+    function updateImageInfo() {
+        imageInfo.innerHTML = '';
+        if (!images.selectedOptions.length)
+            return;
+
+        const data = images.selectedOptions[0].dataset;
+        let t = '';
+        Object.keys(data).forEach(key => {
+            if (key === 'url')
+                t+=`${key}: <a href="${data[key]}">${data[key]}</a><br>`
+            else
+                t+=`${key}: ${data[key]}<br>`
+        });
+        imageInfo.innerHTML = t;
+    }
+
+    sources.addEventListener('change', loadJson);
+    images.addEventListener('change', updateImageInfo);
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+[
+  {
+    "channel": "dev-channel",
+    "desc": "",
+    "file": "chromeos_14516.0.0_reven_recovery_dev-channel_mp-v2.bin",
+    "filesize": 6939566592,
+    "hwidmatch": "^REVEN($| .*)",
+    "manufacturer": "Google Chrome OS Flex",
+    "md5": "7d91cf099c5d7bb33e66cab8cf56a23f",
+    "model": "Chrome OS Flex (Developer-Unstable)",
+    "name": "Chrome OS Flex (Developer-Unstable)",
+    "photourl": "",
+    "sha1": "b11edcd9ef35ec24a9fcb3d9f4e6c507d3da3637",
+    "sku": "",
+    "url": "https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_14516.0.0_reven_recovery_dev-channel_mp-v2.bin.zip",
+    "version": "14516.0.0",
+    "zipfilesize": 1095476192,
+    "chrome_version": "100.0.4880.0",
+    "hwids": []
+  }
+]
