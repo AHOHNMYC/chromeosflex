@@ -11,21 +11,27 @@
 </head>
 <body>
 <table>
-    <tr>
-        <td>
-            <select id="sources">
-                <option></option>
-                <option>cloudready_recovery</option>
-                <option>onhub_recovery</option>
-                <option>recovery</option>
-                <option>workspaceHardware_recovery</option>
-            </select>
-        </td>
-        <td>
-            <select id="images"></select><br>
-            <span id="imageInfo"></span>
-        </td>
-    </tr>
+    <thead>
+    All this info taken <a target="_blank" href="https://raw.githubusercontent.com/AHOHNMYC/chromeosflex/master/get_jsons.cmd">from JSONs</a> found in <a href="https://chrome.google.com/webstore/detail/pocpnlppkickgojjlmhdmidojbmbodfm" target="_blank">Chromebook recovery utility</a> extension.<br>
+    Links leads to ZIP files containing BIN files, which are themselves GPT images, ready to load to USB drive using utilities like dd or <a href="https://rufus.ie">Rufus</a> (in dd mode).
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <select id="sources">
+                    <option></option>
+                    <option>cloudready_recovery</option>
+                    <option>onhub_recovery</option>
+                    <option>recovery</option>
+                    <option>workspaceHardware_recovery</option>
+                </select>
+            </td>
+            <td>
+                <select id="images"></select><br>
+                <span id="imageInfo"></span>
+            </td>
+        </tr>
+    </tbody>
 </table>
 <script>
     function loadJson() {
@@ -63,6 +69,7 @@
 
     sources.addEventListener('change', loadJson);
     images.addEventListener('change', updateImageInfo);
+    sources.focus();
 </script>
 
 </body>
