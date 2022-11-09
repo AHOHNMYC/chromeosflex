@@ -5,7 +5,7 @@
     <title>Chrome OS download</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * {font-family: monospace}
+        * {font-family: monospace; font-size: large;}
         td {vertical-align: top}
     </style>
 </head>
@@ -68,12 +68,42 @@
         const data = images.selectedOptions[0].dataset;
         let t = '';
         Object.keys(data).forEach(key => {
-            if (key === 'url')
-                t+=`${key}: <a href="${data[key]}">${data[key]}</a><br>`
-            else
-                t+=`${key}: ${data[key]}<br>`
+            if (!data[key])
+                return;
+
+            t+=`<font color="gray">${key}</font>: `;
+            switch (key) {
+                case 'url':
+                    t+=`<a href="${data[key]}">${data[key]}</a>`;
+                    break;
+                case 'filesize':
+                case 'zipfilesize':
+                    t+=`${data[key]} (${formatSize(data[key])})`;
+                    break;
+                case 'md5':
+                    t+=`${data[key]} (<a target="_blank" href="https://emn178.github.io/online-tools/md5_checksum.html">check</a>)`;
+                    break;
+                case 'sha1':
+                    t+=`${data[key]} (<a target="_blank" href="https://emn178.github.io/online-tools/sha1_checksum.html">check</a>)`;
+                    break;
+                default:
+                    t+=`${data[key]}`;
+                    break;
+            }
+            t+='<br>'
         });
         imageInfo.innerHTML = t;
+    }
+
+    function formatSize(size) {
+        const prefixes = 'KMG';
+        let units = 'B';
+        let prefix_index = -1;
+        while (size >= 1024) {
+            size /= 1024;
+            units = prefixes[++prefix_index] + 'iB';
+        }
+        return `<font color="red">${size.toFixed(2)} ${units}</font>`
     }
 
     sources.addEventListener('change', loadJson);
