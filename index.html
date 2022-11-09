@@ -44,11 +44,16 @@
 
         fetch(sources.value+'.json')
         .then(resp => resp.json())
-        .then(json => json.forEach(image => {
-            const o = images.appendChild(document.createElement('option'));
-            Object.keys(image).forEach(key => o.dataset[key] = image[key]);
-            o.textContent = image.name;
-        }))
+        .then(json => {
+            let names = json.map(image => image.name)
+            names.sort();
+            names.forEach(name => {
+                const image = json.find(image => image.name === name);
+                const o = images.appendChild(document.createElement('option'));
+                Object.keys(image).forEach(key => o.dataset[key] = image[key]);
+                o.textContent = image.name;
+            })
+        })
         .then(updateImageInfo)
     }
 
