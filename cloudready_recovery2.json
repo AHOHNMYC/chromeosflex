@@ -1,0 +1,40 @@
+[
+  {
+    "channel": "DEV",
+    "desc": "",
+    "file": "chromeos_14794.0.0_reven_recovery_dev-channel_mp-v2.bin",
+    "filesize": 6939566592,
+    "hwidmatch": "^REVEN($|-.*)",
+    "manufacturer": "Google Chrome OS Flex",
+    "md5": "442e88dec2cf2201c82c60cc6ee9a8f6",
+    "model": "Chrome OS Flex",
+    "name": "Chrome OS Flex",
+    "photourl": "",
+    "sha1": "93ebd1cf8c3463e668cc507f1b165ced6791831e",
+    "sku": "",
+    "url": "https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_14794.0.0_reven_recovery_dev-channel_mp-v2.bin.zip",
+    "version": "14794.0.0",
+    "zipfilesize": 1174071023,
+    "chrome_version": "103.0.5045.0",
+    "hwids": []
+  },
+  {
+    "channel": "STABLE",
+    "desc": "",
+    "file": "chromeos_15054.115.0_reven_recovery_stable-channel_mp-v2.bin",
+    "filesize": 6939566592,
+    "hwidmatch": "^REVEN($|-.*)",
+    "manufacturer": "Google Chrome OS Flex",
+    "md5": "ff1f4045549f54231edf948db4faf3e2",
+    "model": "Chrome OS Flex",
+    "name": "Chrome OS Flex",
+    "photourl": "",
+    "sha1": "564c6ec9023c323b364dbee10c397335dd8b451a",
+    "sku": "",
+    "url": "https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_15054.115.0_reven_recovery_stable-channel_mp-v2.bin.zip",
+    "version": "15054.115.0",
+    "zipfilesize": 1191771177,
+    "chrome_version": "106.0.5249.134",
+    "hwids": []
+  }
+]
