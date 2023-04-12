@@ -5,16 +5,79 @@
     <title>Chrome OS download</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * {font-family: monospace; font-size: large;}
+        table {font-family: monospace; font-size: large;}
         td {vertical-align: top}
+        body > div {
+            max-width: 40em;
+            margin: auto;
+            padding: 1em;
+            font-family: sans-serif;
+        }
+        .list {
+            color: -webkit-activelink;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-<table>
-    <thead>
+<div>
     All this info taken <a target="_blank" href="https://raw.githubusercontent.com/AHOHNMYC/chromeosflex/master/get_jsons.cmd">from JSONs</a> found in <a href="https://chrome.google.com/webstore/detail/pocpnlppkickgojjlmhdmidojbmbodfm" target="_blank">Chromebook recovery utility</a> extension.<br>
     Links leads to ZIP files containing BIN files, which are themselves GPT images, ready to load to USB drive using utilities like dd or <a href="https://rufus.ie">Rufus</a> (in dd mode).<br>
+</div>
+<div>
+    Below is two drop-down lists: one is list (json file), other one is selector of image from list. You may put focus on the selector by pressing <kbd>Tab</kbd> key and switch elements with <kbd>Up arrow</kbd> and <kbd>Down arrow</kbd> keys.
+</div>
+<div>
+    <table>
+        <thead>Description of lists</thead>
+        <tbody>
+            <tr>
+                <td><span class="list">cloudready_recovery</span></td>
+                <td>Stable ChromeOS Flex builds</td>
+            </tr>
+            <tr>
+                <td><span class="list">cloudready_recovery2</span></td>
+                <td>Stable and dev ChromeOS Flex builds</td>
+            </tr>
+            <tr>
+                <td><span class="list">onhub_recovery</span></td>
+                <td>ChromeOS builds for <a target="_blank" href="https://web.archive.org/web/20210415001551/https://on.google.com/hub/">discounted Google OnHub</a> wireless routers (<a target="_blank" href="https://store.google.com/us/product/google_wifi_2nd_gen">Google Wifi</a>,
+                    <a target="_blank" href="https://www.tp-link.com/us/home-networking/wifi-router/tgr1900/">TP-Link TGR1900</a>,
+                    <a target="_blank" href="http://en.techinfodepot.shoutwiki.com/wiki/ASUS_SRT-AC1900_(ASUS_OnHub)">ASUS SRT-AC1900</a>)</td>
+            </tr>
+            <tr>
+                <td><span class="list">recovery</span></td>
+                <td>Stable ChromeOS builds for various models</td>
+            </tr>
+            <tr>
+                <td><span class="list">recovery2</span></td>
+                <td><a target="_blank" href="https://support.google.com/chrome/a/answer/11333726"><abbr title="Long-term support candidate">LTC</abbr></a>, <abbr title="Long-term release?">LTR</abbr> and stable ChromeOS builds for various models</td>
+            </tr>
+            <tr>
+                <td><span class="list">workspaceHardware_recovery</span></td>
+                <td>Stable ChromeOS builds for Meet Compute System (all-in-one PCs)</td>
+            </tr>
+            <tr>
+                <td><span class="list">workspaceHardware_recovery2</span></td>
+                <td>Same</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
     Thanks <a target="_blank" href="https://freedns.afraid.org">afraid.org</a> for free domain.
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                <label for="sources">List</label>
+            </td>
+            <td>
+                <label for="images">Image from list</label>
+            </td>
+        </tr>
     </thead>
     <tbody>
         <tr>
@@ -48,10 +111,8 @@
         fetch(sources.value+'.json')
         .then(resp => resp.json())
         .then(json => {
-            let names = json.map(image => image.name)
-            names.sort();
-            names.forEach(name => {
-                const image = json.find(image => image.name === name);
+            json.sort((a,b) => a.name.localeCompare(b.name))
+            json.forEach(image => {
                 const o = images.appendChild(document.createElement('option'));
                 Object.keys(image).forEach(key => o.dataset[key] = image[key]);
                 o.textContent = image.name;
@@ -109,6 +170,14 @@
     sources.addEventListener('change', loadJson);
     images.addEventListener('change', updateImageInfo);
     sources.focus();
+
+    document.querySelectorAll('.list').forEach(el => {
+        el.addEventListener('click', () => {
+            sources.value = el.textContent;
+            sources.dispatchEvent(new Event('change'));
+            images.focus();
+        })
+    })
 </script>
 
 </body>
